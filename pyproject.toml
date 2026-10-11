@@ -1,0 +1,20 @@
+[project]
+name = "jev-tracer"
+version = "0.1.0"
+description = "Evidence-based detection of silent failures in agent runs."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.27,<1",
+    "jevals==0.1.4",
+    "langchain>=1,<2",
+    "langchain-openai>=1,<2",
+    "langgraph>=1,<2",
+    "neatlogs[langchain]>=1.4.26",
+    "pydantic>=2.14.0",
+    "python-dotenv>=1.2,<2",
+]
+
+[tool.uv]
+package = false
+cache-dir = ".uv-cache"

@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "run_id": "deployment-good",
+  "trace_id": "synthetic-deployment-good",
+  "environment": "synthetic",
+  "task": {
+    "role": "user",
+    "content": "Deploy the service and confirm its health endpoint returns HTTP 200 with a healthy status.",
+    "provenance": {
+      "evidence_id": "task",
+      "source": "conversation",
+      "timestamp": "2026-10-11T10:00:00Z",
+      "trace_id": "synthetic-deployment-good",
+      "span_id": null,
+      "artifact_ref": "synthetic://deployment/good/task"
+    }
+  },
+  "final_claim": {
+    "role": "assistant",
+    "content": "Deployment succeeded. The service is healthy and ready to use.",
+    "provenance": {
+      "evidence_id": "claim",
+      "source": "conversation",
+      "timestamp": "2026-10-11T10:00:05Z",
+      "trace_id": "synthetic-deployment-good",
+      "span_id": null,
+      "artifact_ref": "synthetic://deployment/good/claim"
+    }
+  },
+  "tool_executions": [
+    {
+      "call_id": "deploy-call-1",
+      "name": "deploy_service",
+      "arguments_json": "{\"service\":\"demo-service\"}",
+      "result_json": "{\"deployment_id\":\"demo-release-1\",\"status\":\"accepted\"}",
+      "result_available": true,
+      "result_truncated": false,
+      "provenance": {
+        "evidence_id": "deployment-tool",
+        "source": "tool_execution",
+        "timestamp": "2026-10-11T10:00:03Z",
+        "trace_id": "synthetic-deployment-good",
+        "span_id": "deploy-span-1",
+        "artifact_ref": "synthetic://deployment/good/deployment-tool"
+      }
+    }
+  ],
+  "endpoint_expectation": {
+    "url": "http://127.0.0.1:8765/health",
+    "method": "GET",
+    "expected_status": 200,
+    "expected_body_contains": "\"status\":\"healthy\"",
+    "provenance": {
+      "evidence_id": "health-expectation",
+      "source": "acceptance_criteria",
+      "timestamp": "2026-10-11T10:00:00Z",
+      "trace_id": "synthetic-deployment-good",
+      "span_id": null,
+      "artifact_ref": "synthetic://deployment/good/health-expectation"
+    }
+  },
+  "endpoint_verifications": [
+    {
+      "expectation_id": "health-expectation",
+      "url": "http://127.0.0.1:8765/health",
+      "method": "GET",
+      "status_code": 200,
+      "response_body": "{\"status\":\"healthy\"}",
+      "body_truncated": false,
+      "transport_error": null,
+      "provenance": {
+        "evidence_id": "http-check",
+        "source": "independent_http_probe",
+        "timestamp": "2026-10-11T10:00:04Z",
+        "trace_id": "synthetic-deployment-good",
+        "span_id": null,
+        "artifact_ref": "synthetic://deployment/good/http-check"
+      }
+    }
+  ],
+  "evidence_gaps": []
+}

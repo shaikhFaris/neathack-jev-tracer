@@ -1,0 +1,36 @@
+name: Agent reliability regression
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  reliability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.19"
+          enable-cache: true
+      - name: Install locked environment
+        run: uv sync --locked --python 3.12
+      - name: Schema, collection, evaluation, and workflow tests
+        run: uv run --locked python -m unittest discover -s tests -v
+      - name: Permanent generated regression on the current agent
+        run: uv run --locked python -m unittest discover -s regressions/deployment -p 'test_*.py' -v
+      - name: Validate known-good and known-bad fixture labels
+        run: uv run --locked python -m jev_tracer validate-fixtures
+      - name: Demonstrate regression fails before the fix and passes after it
+        run: uv run --locked python -m jev_tracer demo --approve-demo-fix --output artifacts/ci-demo
+      - name: Upload evidence and regression proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reliability-evidence
+          path: artifacts/
+          if-no-files-found: warn

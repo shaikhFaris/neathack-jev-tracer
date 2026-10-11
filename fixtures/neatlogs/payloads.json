@@ -1,0 +1,46 @@
+{
+  "agent-span": {
+    "success": true,
+    "requestId": "synthetic-request-agent-span",
+    "data": {
+      "traceId": "recorded-demo-trace",
+      "spanId": "agent-span",
+      "fields": {
+        "input": {
+          "available": true,
+          "truncated": false,
+          "mimeType": "application/json",
+          "value": "{\"task\": \"Deploy the service and confirm its health endpoint.\"}"
+        },
+        "output": {
+          "available": true,
+          "truncated": false,
+          "mimeType": "application/json",
+          "value": "{\"final_claim\": \"Deployment succeeded. The service is healthy and ready to use.\"}"
+        }
+      }
+    }
+  },
+  "deployment-span": {
+    "success": true,
+    "requestId": "synthetic-request-deployment-span",
+    "data": {
+      "traceId": "recorded-demo-trace",
+      "spanId": "deployment-span",
+      "fields": {
+        "input": {
+          "available": true,
+          "truncated": false,
+          "mimeType": "application/json",
+          "value": "{\"service\": \"demo-service\"}"
+        },
+        "output": {
+          "available": true,
+          "truncated": false,
+          "mimeType": "application/json",
+          "value": "{\"status\": \"accepted\", \"deployment_id\": \"demo-release-1\"}"
+        }
+      }
+    }
+  }
+}

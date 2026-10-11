@@ -1,0 +1,51 @@
+{
+  "run_id": "recorded-demo-run",
+  "trace_id": "recorded-demo-trace",
+  "environment": "sandbox",
+  "task": {
+    "span_id": "agent-span",
+    "timestamp": "2026-10-11T10:00:00Z",
+    "field": "input",
+    "path": [
+      "task"
+    ]
+  },
+  "final_claim": {
+    "span_id": "agent-span",
+    "timestamp": "2026-10-11T10:00:05Z",
+    "field": "output",
+    "path": [
+      "final_claim"
+    ]
+  },
+  "tools": [
+    {
+      "call_id": "deploy-call-1",
+      "name": "deploy_service",
+      "input": {
+        "span_id": "deployment-span",
+        "timestamp": "2026-10-11T10:00:03Z",
+        "field": "input",
+        "path": []
+      },
+      "output": {
+        "span_id": "deployment-span",
+        "timestamp": "2026-10-11T10:00:03Z",
+        "field": "output",
+        "path": []
+      }
+    }
+  ],
+  "endpoint_expectation": {
+    "url": "http://127.0.0.1:8765/health",
+    "expected_status": 200,
+    "expected_body_contains": "\"status\":\"healthy\"",
+    "provenance": {
+      "evidence_id": "health-expectation",
+      "source": "acceptance_criteria",
+      "timestamp": "2026-10-11T10:00:00Z",
+      "trace_id": "recorded-demo-trace",
+      "artifact_ref": "synthetic://recorded-demo/acceptance-criteria"
+    }
+  }
+}

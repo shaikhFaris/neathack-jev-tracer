@@ -1,0 +1,28 @@
+{
+  "request-good": [
+    {
+      "name": "claimed_shipping_status",
+      "expected": "shipped",
+      "observed": "shipped",
+      "provenance": {
+        "source": "independent_verification",
+        "trace_id": "request-good",
+        "timestamp": "2026-10-11T10:00:05Z",
+        "artifact_ref": "synthetic://order-database/request-good/shipping-status"
+      }
+    }
+  ],
+  "request-false_success": [
+    {
+      "name": "claimed_shipping_status",
+      "expected": "shipped",
+      "observed": "cancelled",
+      "provenance": {
+        "source": "independent_verification",
+        "trace_id": "request-false_success",
+        "timestamp": "2026-10-11T10:00:05Z",
+        "artifact_ref": "synthetic://order-database/request-false_success/shipping-status"
+      }
+    }
+  ]
+}

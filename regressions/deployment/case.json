@@ -1,0 +1,13 @@
+{
+  "run_id": "local-deployment-7985ee131c22",
+  "trace_id": "local-deployment-7985ee131c22",
+  "observed_status": 503,
+  "observed_body": "{\"status\": \"unavailable\"}",
+  "expected_status": 200,
+  "expected_body_contains": "\"status\":\"healthy\"",
+  "evidence_ids": [
+    "health-expectation",
+    "http-probe-0"
+  ],
+  "scope": "Local deployment sample; this reproduces a failure class, not arbitrary production agent code."
+}

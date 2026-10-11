@@ -1,0 +1,495 @@
+{
+  "project_id": "00000000-0000-0000-0000-000000000001",
+  "trace_pages": [
+    {
+      "success": true,
+      "requestId": "recorded-page-1",
+      "data": {
+        "traces": [
+          {
+            "traceId": "request-good",
+            "sessionId": "demo-session",
+            "workflowName": "support-agent",
+            "traceName": "process_request",
+            "status": "success",
+            "finalizationStatus": "finalized",
+            "startedAt": "2026-10-11T10:00:00Z",
+            "completedAt": "2026-10-11T10:00:05Z",
+            "ingestedAt": "2026-10-11T10:00:06Z",
+            "durationMs": 5000,
+            "spansCount": 3,
+            "llmCallsCount": 1,
+            "toolCallsCount": 1,
+            "totalCostUsd": 0.002,
+            "totalTokens": 500,
+            "framework": "LangGraph",
+            "tags": [
+              "demo"
+            ]
+          }
+        ],
+        "page": {
+          "hasMore": true,
+          "limit": 50,
+          "nextCursor": "opaque-recorded-next"
+        }
+      }
+    },
+    {
+      "success": true,
+      "requestId": "recorded-page-2",
+      "data": {
+        "traces": [
+          {
+            "traceId": "request-false_success",
+            "sessionId": "demo-session",
+            "workflowName": "support-agent",
+            "traceName": "process_request",
+            "status": "success",
+            "finalizationStatus": "finalized",
+            "startedAt": "2026-10-11T10:00:00Z",
+            "completedAt": "2026-10-11T10:00:05Z",
+            "ingestedAt": "2026-10-11T10:00:06Z",
+            "durationMs": 5000,
+            "spansCount": 3,
+            "llmCallsCount": 1,
+            "toolCallsCount": 1,
+            "totalCostUsd": 0.002,
+            "totalTokens": 500,
+            "framework": "LangGraph",
+            "tags": [
+              "demo"
+            ]
+          },
+          {
+            "traceId": "request-pending",
+            "sessionId": "demo-session",
+            "workflowName": "support-agent",
+            "traceName": "process_request",
+            "status": "success",
+            "finalizationStatus": "pending",
+            "startedAt": "2026-10-11T10:00:00Z",
+            "completedAt": null,
+            "ingestedAt": "2026-10-11T10:00:06Z",
+            "durationMs": 5000,
+            "spansCount": 3,
+            "llmCallsCount": 1,
+            "toolCallsCount": 1,
+            "totalCostUsd": 0.002,
+            "totalTokens": 500,
+            "framework": "LangGraph",
+            "tags": [
+              "demo"
+            ]
+          }
+        ],
+        "page": {
+          "hasMore": false,
+          "limit": 50,
+          "nextCursor": null
+        }
+      }
+    }
+  ],
+  "contexts": {
+    "request-good": {
+      "trace_id": "request-good",
+      "name": "process_request",
+      "status": "success",
+      "created_at": "2026-10-11T10:00:00Z",
+      "span_count": 3,
+      "total_latency_ms": 5000,
+      "total_cost": 0.002,
+      "root_span": {
+        "span_id": "request-good-root",
+        "span_type": "WORKFLOW",
+        "name": "process_request",
+        "status": "success",
+        "start_time": "2026-10-11T10:00:00Z",
+        "end_time": "2026-10-11T10:00:05Z",
+        "latency_ms": 5000,
+        "input": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Private system prompt should never be forwarded."
+            },
+            {
+              "role": "user",
+              "content": "Check order 123 and report its actual shipping status."
+            }
+          ]
+        },
+        "output": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "Check order 123 and report its actual shipping status."
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "call-1",
+                  "type": "function",
+                  "function": {
+                    "name": "lookup_order",
+                    "arguments": "{\"order_id\":123}"
+                  }
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "tool_call_id": "call-1",
+              "content": "{\"order_id\": 123, \"status\": \"shipped\"}"
+            },
+            {
+              "role": "assistant",
+              "content": "Order 123 has shipped."
+            }
+          ]
+        },
+        "children": [
+          {
+            "span_id": "request-good-llm",
+            "span_type": "LLM",
+            "name": "answer",
+            "status": "success",
+            "start_time": "2026-10-11T10:00:04Z",
+            "latency_ms": 1000,
+            "input": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Check order 123 and report its actual shipping status."
+                }
+              ],
+              "tools": [
+                {
+                  "type": "function",
+                  "function": {
+                    "name": "lookup_order",
+                    "description": "Read order state.",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "order_id": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "order_id"
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "output": {
+              "choices": [
+                {
+                  "message": {
+                    "role": "assistant",
+                    "content": "Order 123 has shipped."
+                  }
+                }
+              ]
+            },
+            "metadata": {
+              "model": "recorded-model",
+              "input_tokens": 400,
+              "output_tokens": 100
+            }
+          },
+          {
+            "span_id": "request-good-tool",
+            "span_type": "TOOL",
+            "name": "lookup_order",
+            "status": "success",
+            "start_time": "2026-10-11T10:00:02Z",
+            "latency_ms": 100,
+            "input": {
+              "order_id": 123
+            },
+            "output": {
+              "order_id": 123,
+              "status": "shipped"
+            },
+            "metadata": {
+              "tool_name": "lookup_order",
+              "tool_call_id": "call-1"
+            }
+          }
+        ]
+      }
+    },
+    "request-false_success": {
+      "trace_id": "request-false_success",
+      "name": "process_request",
+      "status": "success",
+      "created_at": "2026-10-11T10:00:00Z",
+      "span_count": 3,
+      "total_latency_ms": 5000,
+      "total_cost": 0.002,
+      "root_span": {
+        "span_id": "request-false_success-root",
+        "span_type": "WORKFLOW",
+        "name": "process_request",
+        "status": "success",
+        "start_time": "2026-10-11T10:00:00Z",
+        "end_time": "2026-10-11T10:00:05Z",
+        "latency_ms": 5000,
+        "input": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Private system prompt should never be forwarded."
+            },
+            {
+              "role": "user",
+              "content": "Check order 123 and report its actual shipping status."
+            }
+          ]
+        },
+        "output": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "Check order 123 and report its actual shipping status."
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "call-1",
+                  "type": "function",
+                  "function": {
+                    "name": "lookup_order",
+                    "arguments": "{\"order_id\":123}"
+                  }
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "tool_call_id": "call-1",
+              "content": "{\"order_id\": 123, \"status\": \"cancelled\"}"
+            },
+            {
+              "role": "assistant",
+              "content": "Order 123 has shipped."
+            }
+          ]
+        },
+        "children": [
+          {
+            "span_id": "request-false_success-llm",
+            "span_type": "LLM",
+            "name": "answer",
+            "status": "success",
+            "start_time": "2026-10-11T10:00:04Z",
+            "latency_ms": 1000,
+            "input": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Check order 123 and report its actual shipping status."
+                }
+              ],
+              "tools": [
+                {
+                  "type": "function",
+                  "function": {
+                    "name": "lookup_order",
+                    "description": "Read order state.",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "order_id": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "order_id"
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "output": {
+              "choices": [
+                {
+                  "message": {
+                    "role": "assistant",
+                    "content": "Order 123 has shipped."
+                  }
+                }
+              ]
+            },
+            "metadata": {
+              "model": "recorded-model",
+              "input_tokens": 400,
+              "output_tokens": 100
+            }
+          },
+          {
+            "span_id": "request-false_success-tool",
+            "span_type": "TOOL",
+            "name": "lookup_order",
+            "status": "success",
+            "start_time": "2026-10-11T10:00:02Z",
+            "latency_ms": 100,
+            "input": {
+              "order_id": 123
+            },
+            "output": {
+              "order_id": 123,
+              "status": "cancelled"
+            },
+            "metadata": {
+              "tool_name": "lookup_order",
+              "tool_call_id": "call-1"
+            }
+          }
+        ]
+      }
+    },
+    "request-pending": {
+      "trace_id": "request-pending",
+      "name": "process_request",
+      "status": "success",
+      "created_at": "2026-10-11T10:00:00Z",
+      "span_count": 3,
+      "total_latency_ms": 5000,
+      "total_cost": 0.002,
+      "root_span": {
+        "span_id": "request-pending-root",
+        "span_type": "WORKFLOW",
+        "name": "process_request",
+        "status": "success",
+        "start_time": "2026-10-11T10:00:00Z",
+        "end_time": "2026-10-11T10:00:05Z",
+        "latency_ms": 5000,
+        "input": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "Private system prompt should never be forwarded."
+            },
+            {
+              "role": "user",
+              "content": "Check order 123 and report its actual shipping status."
+            }
+          ]
+        },
+        "output": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "Check order 123 and report its actual shipping status."
+            },
+            {
+              "role": "assistant",
+              "content": null,
+              "tool_calls": [
+                {
+                  "id": "call-1",
+                  "type": "function",
+                  "function": {
+                    "name": "lookup_order",
+                    "arguments": "{\"order_id\":123}"
+                  }
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "tool_call_id": "call-1",
+              "content": "{\"order_id\": 123, \"status\": \"cancelled\"}"
+            },
+            {
+              "role": "assistant",
+              "content": "Order 123 has shipped."
+            }
+          ]
+        },
+        "children": [
+          {
+            "span_id": "request-pending-llm",
+            "span_type": "LLM",
+            "name": "answer",
+            "status": "success",
+            "start_time": "2026-10-11T10:00:04Z",
+            "latency_ms": 1000,
+            "input": {
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Check order 123 and report its actual shipping status."
+                }
+              ],
+              "tools": [
+                {
+                  "type": "function",
+                  "function": {
+                    "name": "lookup_order",
+                    "description": "Read order state.",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "order_id": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "order_id"
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "output": {
+              "choices": [
+                {
+                  "message": {
+                    "role": "assistant",
+                    "content": "Order 123 has shipped."
+                  }
+                }
+              ]
+            },
+            "metadata": {
+              "model": "recorded-model",
+              "input_tokens": 400,
+              "output_tokens": 100
+            }
+          },
+          {
+            "span_id": "request-pending-tool",
+            "span_type": "TOOL",
+            "name": "lookup_order",
+            "status": "success",
+            "start_time": "2026-10-11T10:00:02Z",
+            "latency_ms": 100,
+            "input": {
+              "order_id": 123
+            },
+            "output": {
+              "order_id": 123,
+              "status": "cancelled"
+            },
+            "metadata": {
+              "tool_name": "lookup_order",
+              "tool_call_id": "call-1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

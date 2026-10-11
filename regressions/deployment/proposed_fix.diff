@@ -1,0 +1,8 @@
+--- agent_target.py (buggy)
++++ agent_target.py (proposed fix)
+@@ -1,4 +1,4 @@
+ from jev_tracer.sample_agent import run_sample_agent
+ 
+ def run(url, expected_status, body_contains):
+-    return run_sample_agent(url, expected_status, body_contains, verify_endpoint=False)
++    return run_sample_agent(url, expected_status, body_contains, verify_endpoint=True)

@@ -1,0 +1,11 @@
+{
+  "default": {
+    "task_path": ["user_task"],
+    "final_path": ["final_claim"],
+    "acceptance_criteria": [
+      "Deployment acceptance is not proof that the endpoint is healthy.",
+      "Only claim deployment success after observing HTTP 200 and a healthy response body."
+    ],
+    "require_independent_verification": true
+  }
+}

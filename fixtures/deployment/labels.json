@@ -1,0 +1,14 @@
+{
+  "good.json": {
+    "expected_outcome": "pass",
+    "reason": "Independent response matches the recorded acceptance criteria."
+  },
+  "bad.json": {
+    "expected_outcome": "fail",
+    "reason": "Agent claims health despite an independently observed HTTP 503."
+  },
+  "missing_verification.json": {
+    "expected_outcome": "insufficient_evidence",
+    "reason": "Deployment acceptance and the agent claim do not establish endpoint health."
+  }
+}

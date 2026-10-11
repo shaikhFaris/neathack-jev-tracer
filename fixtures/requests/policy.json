@@ -1,0 +1,10 @@
+{
+  "default": {
+    "acceptance_criteria": [
+      "Answer must match the order state returned by the read-only lookup tool."
+    ],
+    "max_cost_usd": 0.01,
+    "max_tokens": 1000
+  },
+  "workflows": {}
+}
